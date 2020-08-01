@@ -68,6 +68,9 @@ module.exports = function (eleventyConfig) {
 
 	eleventyConfig.addPassthroughCopy("img");
 	eleventyConfig.addPassthroughCopy("css");
+	eleventyConfig.addPassthroughCopy("favicon.png");
+	eleventyConfig.addPassthroughCopy("favicon-32.png");
+	eleventyConfig.addPassthroughCopy("favicon.svg");
 
 	/* Markdown Overrides */
 	let markdownLibrary = markdownIt({
