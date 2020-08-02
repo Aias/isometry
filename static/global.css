@@ -1,0 +1,33 @@
+:root {
+	--black: rgba(0, 0, 0, 0.85);
+	--white: rgba(255, 255, 255, 0.85);
+	--bg: #d6dade;
+}
+
+html {
+	box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+html,
+body {
+	padding: 0;
+	margin: 0;
+	font-family: system-ui, sans-serif;
+	font-size: 16px;
+	line-height: 1.4;
+	background-color: var(--bg);
+}
+
+body {
+	color: var(--black);
+	margin: 2em;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+}

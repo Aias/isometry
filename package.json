@@ -1,35 +1,24 @@
 {
-  "name": "eleventy-base-blog",
-  "version": "5.0.2",
-  "description": "A starter repository for a blog web site using the Eleventy static site generator.",
-  "scripts": {
-    "build": "eleventy",
-    "watch": "eleventy --watch",
-    "dev": "eleventy --serve",
-    "start": "eleventy --serve",
-    "debug": "DEBUG=* eleventy"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/11ty/eleventy-base-blog.git"
-  },
-  "author": {
-    "name": "Zach Leatherman",
-    "email": "zachleatherman@gmail.com",
-    "url": "https://zachleat.com/"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/11ty/eleventy-base-blog/issues"
-  },
-  "homepage": "https://github.com/11ty/eleventy-base-blog#readme",
-  "devDependencies": {
-    "@11ty/eleventy": "^0.11.0",
-    "@11ty/eleventy-navigation": "^0.1.6",
-    "@11ty/eleventy-plugin-rss": "^1.0.9",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
-    "luxon": "^1.21.3",
-    "markdown-it": "^8.4.2",
-    "markdown-it-anchor": "^5.2.5"
-  }
+	"name": "isometry",
+	"description": "explorations in perspective",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "sapper dev",
+		"build": "sapper build",
+		"export": "sapper export",
+		"start": "node __sapper__/build"
+	},
+	"dependencies": {
+		"compression": "^1.7.1",
+		"polka": "next",
+		"sirv": "^1.0.0"
+	},
+	"devDependencies": {
+		"npm-run-all": "^4.1.5",
+		"sapper": "^0.27.0",
+		"svelte": "^3.0.0",
+		"svelte-loader": "^2.9.0",
+		"webpack": "^4.7.0",
+		"webpack-modules": "^1.0.0"
+	}
 }
