@@ -1,5 +1,10 @@
-<article>
+<article style="--cosAngle: {cosAngle}; --sinAngle: {sinAngle}; --tanAngle: {tanAngle}; --angle: {tiltAngle}deg;">
 	<h1>City of Walls</h1>
+	<!-- <input type="range" step="1" bind:value="{tiltAngle}" min="-60" max="60" />
+	<div>
+		Current angle is {tiltAngle}deg. Cos: {toPlaces(cosAngle)}. Sin: {toPlaces(sinAngle)}. Tan:
+		{toPlaces(tanAngle)}.
+	</div> -->
 	<div class="assembly">
 		<div class="faces">
 			<div class="face face--left face--quote">
@@ -11,7 +16,9 @@
 			<div class="face face--right face--image" style="background-image: url('/images/37.jpeg');">
 				<img alt="Isometric illustration number 37." src="/images/37.jpeg" />
 			</div>
-			<div class="face face--top face--empty"></div>
+			<div class="face face--top face--empty">
+				<div class="top-container"></div>
+			</div>
 		</div>
 		<aside class="info">
 			<code>
@@ -22,17 +29,30 @@
 	</div>
 </article>
 
+<script>
+	let tiltAngle = '30';
+	$: angle = degToRad(Number(tiltAngle));
+	$: cosAngle = Math.cos(angle);
+	$: sinAngle = Math.sin(angle);
+	$: tanAngle = Math.tan(angle);
+
+	const toPlaces = (number = 0, places = 3) => Math.round(number * 1000) / 1000;
+	const degToRad = (deg = 0) => (deg * Math.PI) / 180;
+</script>
+
 <style>
 	article {
-		--cos30: 0.86602540378;
-		--angle: 30deg;
 		--separation: 1.5px;
-		--iso-left: scaleX(var(--cos30)) skewX(var(--angle)) rotate(var(--angle)) scaleY(calc(1 / var(--cos30)))
+		--iso-left: scaleX(var(--cosAngle)) skewX(var(--angle)) rotate(var(--angle)) scaleY(calc(1 / var(--cosAngle)))
 			translate(calc(-1 * var(--separation)), var(--separation));
-		--iso-right: scaleX(var(--cos30)) skewX(calc(-1 * var(--angle))) rotate(calc(-1 * var(--angle)))
-			scaleY(calc(1 / var(--cos30))) translate(var(--separation), var(--separation));
-		--iso-top: translate(-200%, -50%) scaleY(var(--cos30)) rotate(calc(-1 * var(--angle))) skewX(var(--angle))
-			scaleX(calc(1 / var(--cos30))) translate(var(--separation), calc(-1 * var(--separation)));
+		--iso-right: scaleX(var(--cosAngle)) skewX(calc(-1 * var(--angle))) rotate(calc(-1 * var(--angle)))
+			scaleY(calc(1 / var(--cosAngle))) translate(var(--separation), var(--separation));
+		--iso-top: scaleY(var(--cosAngle)) rotate(var(--angle)) skewX(calc(-90deg + (2 * var(--angle))))
+			scaleX(calc(1 / var(--cosAngle))) scaleY(calc(2 * var(--cosAngle) * var(--tanAngle)));
+	}
+
+	input[type='range'] {
+		width: 100%;
 	}
 
 	article {
@@ -85,24 +105,28 @@
 	}
 
 	.assembly:hover .face--top {
-		transform: translate(-200%, -100%) scaleY(var(--cos30)) rotate(calc(-1 * var(--angle))) skewX(var(--angle))
-			scaleX(calc(1 / var(--cos30))) translate(var(--separation), calc(-1 * var(--separation)));
+		bottom: 150%;
 		opacity: 0;
 	}
 
 	.faces {
 		display: flex;
-		width: 150%;
+		width: 100%;
+		position: relative;
 	}
 
 	.face {
 		--border-width: 0.25em;
 		border: var(--border-width) solid var(--black);
-		transition: transform 0.5s, opacity 0.5s, margin 0.5s;
+		transition: all 0.5s;
+	}
+
+	.face--left,
+	.face--right {
+		width: 50%;
 	}
 
 	.face--left {
-		width: calc(100% / 3);
 		transform: var(--iso-left);
 		transform-origin: bottom right;
 	}
@@ -110,15 +134,23 @@
 	.face--right {
 		transform: var(--iso-right);
 		transform-origin: bottom left;
-		width: calc(100% / 3);
 	}
 
 	.face--top {
-		width: calc(100% / 3);
-		padding-top: calc((100% / 3) - (2 * var(--border-width)));
+		position: absolute;
+		width: 50%;
 		height: 0;
+		bottom: calc(100% + var(--separation));
+		padding-top: calc(50% - (2 * var(--border-width)));
 		transform: var(--iso-top);
-		transform-origin: top left;
+		transform-origin: bottom right;
+	}
+
+	.face--top > .top-container {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		transform: rotate(-90deg);
 	}
 
 	.face--quote {
@@ -132,8 +164,8 @@
 
 	.face--quote > blockquote {
 		margin: 0;
-		transform: scaleX(var(--cos30));
-		width: calc(100% * (1 / var(--cos30)));
+		transform: scaleX(var(--cosAngle));
+		width: calc(100% * (1 / var(--cosAngle)));
 		transform-origin: left;
 		transition: transform 0.5s;
 	}
