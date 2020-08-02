@@ -14,11 +14,23 @@
 	<slot></slot>
 </main>
 
+<footer>
+	<small>
+		A microsite by <a href="https://nicktrombley.design">Nick Trombley</a>.
+	</small>
+</footer>
+
 <style>
 	header {
 		margin-bottom: 1em;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+	}
+
+	footer {
+		margin-top: 4em;
+		text-align: center;
+		display: none;
 	}
 </style>

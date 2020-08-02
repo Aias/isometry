@@ -1,35 +1,15 @@
-<article style="--cosAngle: {cosAngle}; --sinAngle: {sinAngle}; --tanAngle: {tanAngle}; --angle: {tiltAngle}deg;">
-	<h1>City of Walls</h1>
-	<!-- <input type="range" step="1" bind:value="{tiltAngle}" min="-60" max="60" />
-	<div>
-		Current angle is {tiltAngle}deg. Cos: {toPlaces(cosAngle)}. Sin: {toPlaces(sinAngle)}. Tan:
-		{toPlaces(tanAngle)}.
-	</div> -->
-	<div class="assembly">
-		<div class="faces">
-			<div class="face face--left face--quote">
-				<blockquote>
-					<p>“But when we give up symbols and opinions, aren’t we left in the utter nothingness of being?”</p>
-					<p>Yes.</p>
-				</blockquote>
-			</div>
-			<div class="face face--right face--image" style="background-image: url('/images/37.jpeg');">
-				<img alt="Isometric illustration number 37." src="/images/37.jpeg" />
-			</div>
-			<div class="face face--top face--empty">
-				<div class="top-container"></div>
-			</div>
-		</div>
-		<aside class="info">
-			<code>
-				Fineliner on mixed-media paper.<br />
-				July 2020.
-			</code>
-		</aside>
-	</div>
-</article>
+<script context="module">
+	export async function preload(page, session) {
+		const res = await this.fetch(`posts.json`);
+		const posts = await res.json();
+
+		return { posts };
+	}
+</script>
 
 <script>
+	export let posts = [];
+
 	let tiltAngle = '30';
 	$: angle = degToRad(Number(tiltAngle));
 	$: cosAngle = Math.cos(angle);
@@ -40,8 +20,43 @@
 	const degToRad = (deg = 0) => (deg * Math.PI) / 180;
 </script>
 
+<!-- <input type="range" step="1" bind:value="{tiltAngle}" min="-60" max="60" />
+<div>
+	Current angle is {tiltAngle}deg. Cos: {toPlaces(cosAngle)}. Sin: {toPlaces(sinAngle)}. Tan:
+	{toPlaces(tanAngle)}.
+</div> -->
+{#each posts as {title, quote, main_image, other_images, date, materials}}
+<article
+	style="--cosAngle: {cosAngle}; --sinAngle: {sinAngle}; --tanAngle: {tanAngle}; --angle: {tiltAngle}deg; --push: {Math.random()};"
+>
+	<h1>{title}</h1>
+	<div class="assembly">
+		<div class="faces">
+			<div class="face face--left face--quote">
+				<blockquote>
+					{quote}
+				</blockquote>
+			</div>
+			<div class="face face--right face--image" style="background-image: url('/images/{main_image}.jpeg');">
+				<img alt="Isometric illustration number {main_image}." src="/images/{main_image}.jpeg" />
+			</div>
+			<div class="face face--top face--empty">
+				<div class="top-container"></div>
+			</div>
+		</div>
+		<aside class="info">
+			<code>
+				{materials}<br />
+				{date}.
+			</code>
+		</aside>
+	</div>
+</article>
+{/each}
+
 <style>
 	article {
+		--border-width: 0.25em;
 		--separation: 1.5px;
 		--iso-left: scaleX(var(--cosAngle)) skewX(var(--angle)) rotate(var(--angle)) scaleY(calc(1 / var(--cosAngle)))
 			translate(calc(-1 * var(--separation)), var(--separation));
@@ -51,15 +66,24 @@
 			scaleX(calc(1 / var(--cosAngle))) scaleY(calc(2 * var(--cosAngle) * var(--tanAngle)));
 	}
 
-	input[type='range'] {
-		width: 100%;
-	}
-
 	article {
+		--max-width: 600px;
+		--push: 0.5;
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		max-width: var(--max-width);
+		margin-left: max(0px, calc(var(--push) * (100vw - (2 * var(--body-margin)) - var(--max-width))));
+		overflow: hidden;
+
+		border-bottom: var(--border-width) solid var(--black);
+		padding-bottom: 1em;
+		margin-bottom: 2em;
+	}
+
+	article:last-child {
+		border-bottom: none;
 	}
 
 	h1 {
@@ -70,7 +94,6 @@
 	}
 
 	.assembly {
-		max-width: 600px;
 		display: grid;
 		grid-template-rows: 0.75fr 1fr;
 		overflow: hidden;
@@ -116,7 +139,6 @@
 	}
 
 	.face {
-		--border-width: 0.25em;
 		border: var(--border-width) solid var(--black);
 		transition: all 0.5s;
 	}
@@ -168,6 +190,7 @@
 		width: calc(100% * (1 / var(--cosAngle)));
 		transform-origin: left;
 		transition: transform 0.5s;
+		white-space: pre-wrap;
 	}
 
 	.assembly:hover .face--quote > blockquote {
