@@ -25,19 +25,22 @@
 	Current angle is {tiltAngle}deg. Cos: {toPlaces(cosAngle)}. Sin: {toPlaces(sinAngle)}. Tan:
 	{toPlaces(tanAngle)}.
 </div> -->
-{#each posts as {title, quote, main_image, other_images, date, materials}}
+{#each posts as {title, quote, main_image, other_images, date, materials}, i}
 <article
 	style="--cosAngle: {cosAngle}; --sinAngle: {sinAngle}; --tanAngle: {tanAngle}; --angle: {tiltAngle}deg; --push: {Math.random()};"
 >
 	<h1>{title}</h1>
 	<div class="assembly">
 		<div class="faces">
-			<div class="face face--left face--quote">
+			<div class="face face--quote {i % 2 === 0 ? 'face--left' : 'face--right'}">
 				<blockquote>
 					{quote}
 				</blockquote>
 			</div>
-			<div class="face face--right face--image" style="background-image: url('/images/{main_image}.jpeg');">
+			<div
+				class="face face--image {i % 2 === 1 ? 'face--left' : 'face--right'}"
+				style="background-image: url('/images/{main_image}.jpeg');"
+			>
 				<img alt="Isometric illustration number {main_image}." src="/images/{main_image}.jpeg" />
 			</div>
 			<div class="face face--top face--empty">
@@ -144,11 +147,13 @@
 	.face--left {
 		transform: var(--iso-left);
 		transform-origin: bottom right;
+		order: 1;
 	}
 
 	.face--right {
 		transform: var(--iso-right);
 		transform-origin: bottom left;
+		order: 2;
 	}
 
 	.face--top {
