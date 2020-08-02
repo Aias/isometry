@@ -211,7 +211,7 @@
 	}
 
 	@media (max-width: 400px) {
-		.face--left > * {
+		.face--quote > * {
 			display: none;
 		}
 	}
