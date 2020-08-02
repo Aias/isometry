@@ -113,10 +113,6 @@
 		align-items: center;
 	}
 
-	.assembly:hover {
-		cursor: pointer;
-	}
-
 	.assembly:hover .info {
 		opacity: 1;
 	}
