@@ -76,10 +76,7 @@
 		max-width: var(--max-width);
 		margin-left: max(0px, calc(var(--push) * (100vw - (2 * var(--body-margin)) - var(--max-width))));
 		overflow: hidden;
-
-		border-bottom: var(--border-width) solid var(--black);
-		padding-bottom: 1em;
-		margin-bottom: 2em;
+		margin-bottom: 6em;
 	}
 
 	article:last-child {
