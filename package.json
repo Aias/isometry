@@ -2,8 +2,9 @@
 	"name": "isometry",
 	"description": "explorations in perspective",
 	"version": "0.0.1",
+	"license": "MIT",
 	"scripts": {
-		"dev": "sapper dev",
+		"dev": "sapper dev --no-hot",
 		"build": "sapper build",
 		"export": "sapper export",
 		"start": "node __sapper__/build"

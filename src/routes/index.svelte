@@ -1,8 +1,8 @@
 <article>
-	<h1>walled city</h1>
+	<h1>City of Walls</h1>
 	<div class="assembly">
 		<div class="faces">
-			<div class="face face--left">
+			<div class="face face--left face--quote">
 				<blockquote>
 					<p>“But when we give up symbols and opinions, aren’t we left in the utter nothingness of being?”</p>
 					<p>Yes.</p>
@@ -42,15 +42,19 @@
 		align-items: center;
 	}
 
-	article h1 {
-		order: 2;
+	h1 {
+		text-transform: lowercase;
+		order: 1;
+		text-align: center;
+		margin: 0.5em 0;
 	}
 
 	.assembly {
 		max-width: 600px;
 		display: grid;
 		grid-template-rows: 0.75fr 1fr;
-		padding: 1em;
+		overflow: hidden;
+		padding: 1em 0;
 	}
 
 	.info {
@@ -92,8 +96,8 @@
 	}
 
 	.face {
-		--border-width: 4px;
-		border: var(--border-width) solid black;
+		--border-width: 0.25em;
+		border: var(--border-width) solid var(--black);
 		transition: transform 0.5s, opacity 0.5s, margin 0.5s;
 	}
 
@@ -112,14 +116,17 @@
 
 	.face--left {
 		width: calc(100% / 3);
-		background-color: var(--black);
-		padding: 1em;
-		color: rgba(255, 255, 255, 0.85);
 		transform: var(--iso-left);
 		transform-origin: bottom right;
+	}
+
+	.face--quote {
+		background-color: var(--black);
+		color: var(--white);
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		padding: 1em;
 	}
 
 	.face--top {
@@ -133,6 +140,15 @@
 
 	blockquote {
 		margin: 0;
+		transform: scaleX(var(--cos30));
+		width: calc(100% * (1 / var(--cos30)));
+		transform-origin: left;
+		transition: transform 0.5s;
+	}
+
+	.assembly:hover .face--quote blockquote {
+		width: 100%;
+		transform: none;
 	}
 
 	@media (max-width: 400px) {
