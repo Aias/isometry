@@ -8,10 +8,10 @@
 					<p>Yes.</p>
 				</blockquote>
 			</div>
-			<div class="face face--right" style="background-image: url('/images/37.jpeg');">
+			<div class="face face--right face--image" style="background-image: url('/images/37.jpeg');">
 				<img alt="Isometric illustration number 37." src="/images/37.jpeg" />
 			</div>
-			<div class="face face--top"></div>
+			<div class="face face--top face--empty"></div>
 		</div>
 		<aside class="info">
 			<code>
@@ -101,23 +101,24 @@
 		transition: transform 0.5s, opacity 0.5s, margin 0.5s;
 	}
 
-	.face--right {
-		background-color: var(--bg);
-		transform: var(--iso-right);
-		transform-origin: bottom left;
-		width: calc(100% / 3);
-		background-size: cover;
-		background-position: center;
-	}
-
-	.face--right > img {
-		opacity: 0;
-	}
-
 	.face--left {
 		width: calc(100% / 3);
 		transform: var(--iso-left);
 		transform-origin: bottom right;
+	}
+
+	.face--right {
+		transform: var(--iso-right);
+		transform-origin: bottom left;
+		width: calc(100% / 3);
+	}
+
+	.face--top {
+		width: calc(100% / 3);
+		padding-top: calc((100% / 3) - (2 * var(--border-width)));
+		height: 0;
+		transform: var(--iso-top);
+		transform-origin: top left;
 	}
 
 	.face--quote {
@@ -129,16 +130,7 @@
 		padding: 1em;
 	}
 
-	.face--top {
-		background-color: transparent;
-		width: calc(100% / 3);
-		padding-top: calc((100% / 3) - (2 * var(--border-width)));
-		height: 0;
-		transform: var(--iso-top);
-		transform-origin: top left;
-	}
-
-	blockquote {
+	.face--quote > blockquote {
 		margin: 0;
 		transform: scaleX(var(--cos30));
 		width: calc(100% * (1 / var(--cos30)));
@@ -146,9 +138,23 @@
 		transition: transform 0.5s;
 	}
 
-	.assembly:hover .face--quote blockquote {
+	.assembly:hover .face--quote > blockquote {
 		width: 100%;
 		transform: none;
+	}
+
+	.face--image {
+		background-color: var(--bg);
+		background-size: cover;
+		background-position: center;
+	}
+
+	.face--image > img {
+		opacity: 0;
+	}
+
+	.face--empty {
+		background-color: transparent;
 	}
 
 	@media (max-width: 400px) {
