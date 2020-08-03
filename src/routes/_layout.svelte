@@ -22,14 +22,14 @@
 
 <style>
 	header {
-		margin-bottom: 1em;
+		margin-bottom: var(--body-margin);
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 	}
 
 	footer {
-		margin-top: 4em;
+		margin-top: calc(2 * var(--body-margin));
 		text-align: center;
 		display: none;
 	}

@@ -1,7 +1,7 @@
 {
 	"name": "isometry",
 	"description": "explorations in perspective",
-	"version": "0.0.1",
+	"version": "0.9.0",
 	"license": "MIT",
 	"scripts": {
 		"dev": "sapper dev --no-hot",

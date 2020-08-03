@@ -22,8 +22,7 @@
 
 <!-- <input type="range" step="1" bind:value="{tiltAngle}" min="-60" max="60" />
 <div>
-	Current angle is {tiltAngle}deg. Cos: {toPlaces(cosAngle)}. Sin: {toPlaces(sinAngle)}. Tan:
-	{toPlaces(tanAngle)}.
+	Current angle is {tiltAngle}deg. Cos: {toPlaces(cosAngle)}. Sin: {toPlaces(sinAngle)}. Tan: {toPlaces(tanAngle)}.
 </div> -->
 {#each posts as {title, quote, main_image, other_images, date, materials}, i}
 <article
@@ -48,10 +47,12 @@
 			</div>
 		</div>
 		<aside class="info">
-			<code>
-				{materials}<br />
-				{date}.
-			</code>
+			<div class="wrapper">
+				<code>
+					{materials}<br />
+					{date}.
+				</code>
+			</div>
 		</aside>
 	</div>
 </article>
@@ -66,7 +67,7 @@
 		--iso-right: scaleX(var(--cosAngle)) skewX(calc(-1 * var(--angle))) rotate(calc(-1 * var(--angle)))
 			scaleY(calc(1 / var(--cosAngle))) translate(var(--separation), var(--separation));
 		--iso-top: scaleY(var(--cosAngle)) rotate(var(--angle)) skewX(calc(-90deg + (2 * var(--angle))))
-			scaleX(calc(1 / var(--cosAngle))) scaleY(calc(2 * var(--cosAngle) * var(--tanAngle)));
+			scaleX(calc(1 / var(--cosAngle))) scaleY(calc(2 * var(--sinAngle)));
 	}
 
 	article {
@@ -79,7 +80,7 @@
 		max-width: var(--max-width);
 		margin-left: max(0px, calc(var(--push) * (100vw - (2 * var(--body-margin)) - var(--max-width))));
 		overflow: hidden;
-		margin-bottom: 6em;
+		margin-bottom: calc(3 * var(--body-margin));
 	}
 
 	article:last-child {
@@ -95,22 +96,29 @@
 
 	.assembly {
 		display: grid;
-		grid-template-rows: 0.75fr 1fr;
-		overflow: hidden;
-		padding: 1em 0;
+		grid-template-rows: auto auto;
 	}
 
 	.info {
+		position: relative;
+		padding-top: calc(50% + 1em);
 		grid-row: 1;
 		opacity: 0;
-		background-color: rgba(0, 0, 0, 0.03);
 		transition: opacity 0.5s;
-		margin: 0 0 1em 0;
-		padding: 1em;
+	}
+
+	.info .wrapper {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 1em;
+		padding: 0 1em;
 		text-align: center;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		background-color: rgba(0, 0, 0, 0.03);
 	}
 
 	.assembly:hover .info {
@@ -124,7 +132,8 @@
 	}
 
 	.assembly:hover .face--top {
-		bottom: 150%;
+		--offset: calc(-50% - 1em);
+		transform: var(--iso-top) translateX(var(--offset)) translateY(var(--offset));
 		opacity: 0;
 	}
 
