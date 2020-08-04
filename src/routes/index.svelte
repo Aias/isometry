@@ -36,12 +36,15 @@
 					{quote}
 				</blockquote>
 			</div>
-			<div
+			<a
 				class="face face--image {i % 2 === 1 ? 'face--left' : 'face--right'}"
 				style="background-image: url('/images/{main_image}.jpeg');"
+				href="/images/{main_image}.jpeg"
+				target="_blank"
+				title="View full-size image"
 			>
 				<img alt="Isometric illustration number {main_image}." src="/images/{main_image}.jpeg" />
-			</div>
+			</a>
 			<div class="face face--top face--empty">
 				<div class="top-container"></div>
 			</div>
