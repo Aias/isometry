@@ -1,14 +1,5 @@
-<script context="module">
-	export async function preload(page, session) {
-		const res = await this.fetch(`posts.json`);
-		const posts = await res.json();
-
-		return { posts };
-	}
-</script>
-
 <script>
-	export let posts = [];
+	import posts from "../isometry.json";
 
 	let tiltAngle = '30';
 	$: angle = degToRad(Number(tiltAngle));
@@ -16,15 +7,10 @@
 	$: sinAngle = Math.sin(angle);
 	$: tanAngle = Math.tan(angle);
 
-	const toPlaces = (number = 0, places = 3) => Math.round(number * 1000) / 1000;
 	const degToRad = (deg = 0) => (deg * Math.PI) / 180;
 </script>
 
-<!-- <input type="range" step="1" bind:value="{tiltAngle}" min="-60" max="60" />
-<div>
-	Current angle is {tiltAngle}deg. Cos: {toPlaces(cosAngle)}. Sin: {toPlaces(sinAngle)}. Tan: {toPlaces(tanAngle)}.
-</div> -->
-{#each posts as {title, quote, main_image, other_images, date, materials}, i}
+{#each posts as {title, quote, main_image, date, materials}, i}
 <article
 	style="--cosAngle: {cosAngle}; --sinAngle: {sinAngle}; --tanAngle: {tanAngle}; --angle: {tiltAngle}deg; --push: {Math.random()};"
 >

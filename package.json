@@ -1,26 +1,27 @@
 {
-	"name": "isometry",
-	"description": "explorations in perspective",
-	"version": "0.9.0",
-	"license": "MIT",
-	"scripts": {
-		"dev": "sapper dev --no-hot",
-		"build": "sapper build",
-		"export": "sapper export",
-		"start": "node __sapper__/build"
-	},
-	"dependencies": {
-		"compression": "^1.7.1",
-		"node-fetch": "^2.6.7",
-		"polka": "next",
-		"sirv": "^1.0.0"
-	},
-	"devDependencies": {
-		"npm-run-all": "^4.1.5",
-		"sapper": "^0.27.0",
-		"svelte": "^3.0.0",
-		"svelte-loader": "^2.9.0",
-		"webpack": "^4.7.0",
-		"webpack-modules": "^1.0.0"
-	}
+  "name": "isometry",
+  "description": "explorations in perspective",
+  "version": "0.9.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "sapper dev --no-hot",
+    "build": "sapper build",
+    "export": "sapper export",
+    "start": "node __sapper__/build"
+  },
+  "dependencies": {
+    "compression": "^1.8.0",
+    "node-fetch": "^2.7.0",
+    "polka": "^0.5.2",
+    "sirv": "^1.0.19"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "sapper": "^0.29.3",
+    "svelte": "^3.59.2",
+    "svelte-loader": "^2.13.6",
+    "webpack": "^4.47.0",
+    "webpack-modules": "^1.0.0"
+  },
+  "packageManager": "yarn@4.7.0"
 }
