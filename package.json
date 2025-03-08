@@ -9,6 +9,9 @@
     "export": "sapper export",
     "start": "node __sapper__/build"
   },
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "dependencies": {
     "compression": "^1.8.0",
     "node-fetch": "^2.7.0",
